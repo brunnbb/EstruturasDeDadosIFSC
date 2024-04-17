@@ -1,0 +1,57 @@
+package PagamentosDoBanco;
+
+import java.util.LinkedList;
+
+public class TabelaDePagamentos {
+    private int m;
+    private LinkedList<Integer> tabela[];
+
+    @SuppressWarnings("unchecked")
+    public TabelaDePagamentos(int m) {
+        this.m = m;
+        this.tabela = new LinkedList[this.m];
+        for (int i = 0; i < this.m; i++) {
+            this.tabela[i] = new LinkedList<>();
+        }
+    }
+
+    public int calcularRestoDaDivisaoInteira(int valor) {
+        return valor % this.m;
+    }
+
+    public void inserir(int valor) {
+        int classe = calcularRestoDaDivisaoInteira(valor);
+        this.tabela[classe].add(valor);
+    }
+
+    public int consultar(int valor) {
+        int classe = calcularRestoDaDivisaoInteira(valor);
+        int item;
+
+        if (!tabela[classe].contains(valor)) {
+            item = -1;
+        } else {
+            item = valor;
+        }
+
+        return item;
+    }
+
+    public void remover(int valor) {
+        int classe = calcularRestoDaDivisaoInteira(valor);
+
+        if (tabela[classe].contains(valor)) {
+            tabela[classe].remove(valor);
+            System.out.println("Pagamento n° " + valor + " removido.");
+        } else {
+            System.out.println("Pagamento n° " + valor + " não existe.");
+        }
+    }
+
+    public void mostrar() {
+        for (int i = 0; i < this.m; i++) {
+            System.out.println("Tabela[" + i + "]" + " (" + tabela[i].size() + ") " + this.tabela[i].toString());
+        }
+    }
+
+}
