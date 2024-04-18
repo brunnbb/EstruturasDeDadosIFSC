@@ -52,7 +52,7 @@ public class Executora {
                     break;
             }
         } while (!comando.equals("S"));
-
+        input.close();
     }
 
     public static int gerarNumeroAleatorioUnico(ArrayList<Integer> listaNumerosGerados) {

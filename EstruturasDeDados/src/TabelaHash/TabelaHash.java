@@ -4,8 +4,9 @@ import java.util.*;
 
 public class TabelaHash {
     private int m;
-    private LinkedList tabela[];
+    private LinkedList<Integer> tabela[];
 
+    @SuppressWarnings("unchecked")
     public TabelaHash(int m) {
         this.m = m;
         this.tabela = new LinkedList[this.m];
