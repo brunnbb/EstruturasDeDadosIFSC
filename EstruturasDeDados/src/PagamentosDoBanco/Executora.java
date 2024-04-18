@@ -1,7 +1,6 @@
 package PagamentosDoBanco;
 
-import java.util.ArrayList;
-import java.util.Random;
+import java.util.*;
 
 public class Executora {
     public static void main(String[] args) throws Exception {
@@ -11,31 +10,73 @@ public class Executora {
     public static void testarBanco() {
         int classes = 111;
         TabelaDePagamentos tabela = new TabelaDePagamentos(classes);
-
-        ArrayList<Integer> lista = new ArrayList<>();
-        Random gerador = new Random();
-        int numero;
+        ArrayList<Integer> listaNumerosGerados = new ArrayList<>();
 
         for (int i = 0; i < 1000; i++) {
-
-            numero = gerador.nextInt(5000);
-            if (lista.contains(numero)) {
-                do {
-                    numero = gerador.nextInt(5000);
-                } while (lista.contains(numero));
-            }
-            lista.add(numero);
+            int numero = gerarNumeroAleatorioUnico(listaNumerosGerados);
+            listaNumerosGerados.add(numero);
             tabela.inserir(numero);
         }
-        tabela.mostrar();
+        Scanner input = new Scanner(System.in);
+        String comando;
+        do {
+            mostrarMenu();
+            comando = input.nextLine();
+            comando = comando.toUpperCase();
+            switch (comando) {
+                case ("P"):
+                    System.out.println("Digite o identificador do pagamento a ser pesquisado");
+                    int pesquisado = Integer.parseInt(input.nextLine());
+                    if (tabela.consultar(pesquisado) != -1) {
+                        System.out.println(
+                                "Pagamento n° " + pesquisado + " localizado na classe " + (pesquisado % classes));
+                    } else {
+                        System.out.println(
+                                "Não foi encontrado o pagamento n° " + pesquisado + " na classe "
+                                        + pesquisado % classes);
+                    }
+                    break;
+                case ("R"):
+                    System.out.println("Digite o identificador do pagamento a ser removido");
+                    int removido = Integer.parseInt(input.nextLine());
+                    tabela.remover(removido);
+                    break;
+                case ("M"):
+                    tabela.mostrar();
+                    break;
+                case ("S"):
+                    System.out.println("Saindo do programa");
+                    break;
+                default:
+                    System.out.println("Comando invalido");
+                    break;
+            }
+        } while (!comando.equals("S"));
 
-        int consulta = 300;
-        int consultado = tabela.consultar(consulta);
-        if (consultado != -1) {
-            System.out.println("Pagamento n° " + consulta + " localizado.");
-        } else {
-            System.out.println("Não foi encontrado o pagamento n° " + consulta);
+    }
+
+    public static int gerarNumeroAleatorioUnico(ArrayList<Integer> listaNumerosGerados) {
+        Random gerador = new Random();
+        int numero = gerador.nextInt(5000);
+        if (listaNumerosGerados.contains(numero)) {
+            do {
+                numero = gerador.nextInt(5000);
+            } while (listaNumerosGerados.contains(numero));
         }
+        return numero;
+
+    }
+
+    public static void mostrarMenu() {
+        StringBuilder texto = new StringBuilder("-----------------------");
+        texto.append("\nMenu de consulta")
+                .append("\n-----------------------")
+                .append("\nP-Pesquisar")
+                .append("\nR-Remover")
+                .append("\nM-Mostrar")
+                .append("\nS-Sair")
+                .append(("\n-----------------------"));
+        System.out.println(texto);
     }
 
 }

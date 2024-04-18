@@ -26,22 +26,20 @@ public class TabelaDePagamentos {
 
     public int consultar(int valor) {
         int classe = calcularRestoDaDivisaoInteira(valor);
-        int item;
 
-        if (!tabela[classe].contains(valor)) {
-            item = -1;
+        if (tabela[classe].contains(valor)) {
+            return valor;
         } else {
-            item = valor;
+            return -1;
         }
-
-        return item;
     }
 
     public void remover(int valor) {
         int classe = calcularRestoDaDivisaoInteira(valor);
+        Integer valoInteger = Integer.valueOf(valor);
 
-        if (tabela[classe].contains(valor)) {
-            tabela[classe].remove(valor);
+        if (tabela[classe].contains(valoInteger)) {
+            tabela[classe].remove(valoInteger);
             System.out.println("Pagamento n° " + valor + " removido.");
         } else {
             System.out.println("Pagamento n° " + valor + " não existe.");
