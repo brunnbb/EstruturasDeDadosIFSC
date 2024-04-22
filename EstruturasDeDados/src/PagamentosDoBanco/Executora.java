@@ -26,7 +26,7 @@ public class Executora {
             switch (comando) {
                 case ("P"):
                     System.out.println("Digite o identificador do pagamento a ser pesquisado");
-                    int pesquisado = Integer.parseInt(input.nextLine());
+                    int pesquisado = lerNumeroInteiro(input);
                     if (tabela.consultar(pesquisado) != -1) {
                         System.out.println(
                                 "Pagamento n° " + pesquisado + " localizado na classe " + (pesquisado % classes));
@@ -38,7 +38,7 @@ public class Executora {
                     break;
                 case ("R"):
                     System.out.println("Digite o identificador do pagamento a ser removido");
-                    int removido = Integer.parseInt(input.nextLine());
+                    int removido = lerNumeroInteiro(input);
                     tabela.remover(removido);
                     break;
                 case ("M"):
@@ -65,6 +65,27 @@ public class Executora {
         }
         return numero;
 
+    }
+
+    public static int lerNumeroInteiro(Scanner scanner) {
+        while (true) {
+            try {
+                int num = Integer.parseInt(scanner.nextLine());
+                if (num >= 0) {
+                    return num;
+                }
+                while (num < 0) {
+                    System.out.println("Digite um numero entre 0-4999");
+                    num = Integer.parseInt(scanner.nextLine());
+                }
+                return num;
+
+            } catch (NumberFormatException e) {
+                System.out.println("Digite um numero entre 0-4999");
+            } catch (ArrayIndexOutOfBoundsException e) {
+                System.out.println("Digite um numero entre 0-4999");
+            }
+        }
     }
 
     public static void mostrarMenu() {
