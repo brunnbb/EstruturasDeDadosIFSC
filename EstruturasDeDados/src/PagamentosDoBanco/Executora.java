@@ -82,8 +82,6 @@ public class Executora {
 
             } catch (NumberFormatException e) {
                 System.out.println("Digite um numero entre 0-4999");
-            } catch (ArrayIndexOutOfBoundsException e) {
-                System.out.println("Digite um numero entre 0-4999");
             }
         }
     }
