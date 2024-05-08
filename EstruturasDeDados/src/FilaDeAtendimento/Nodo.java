@@ -1,4 +1,4 @@
-package FilaDeAtendimento;
+package filadeatendimento;
 
 public class Nodo {
 

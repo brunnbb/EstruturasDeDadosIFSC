@@ -1,4 +1,4 @@
-package TabelaHash;
+package tabelahash;
 
 import java.util.*;
 

@@ -1,4 +1,4 @@
-package PagamentosDoBanco;
+package pagamentosdobanco;
 
 import java.util.LinkedList;
 

@@ -1,4 +1,4 @@
-package Ordenacoes;
+package pesquisaseordenacoes;
 
 public class Ordenacao {
 
